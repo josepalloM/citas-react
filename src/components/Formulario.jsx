@@ -1,10 +1,42 @@
 import {useState, useEffect} from "react";
-const Formulario = () => {
+import Error from "./Error.jsx";
+
+const Formulario = ({pacientes, setPacientes}) => {
     const [nombre, setNombre] = useState('')
+    const [propietario, serPropietario] = useState('')
+    const [email, setEmail] = useState('')
+    const [fecha, setFecha] = useState('')
+    const [sintomas, setSintomas] = useState('')
+
+    const [error, setError] = useState(false)
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log("Enviando Formulario")
+
+        //Validación del formulario
+        if ([nombre, propietario, email, fecha, sintomas].includes('')){
+            setError(true)
+            console.log('Hay al menos un campo vacio')
+            return
+        }
+
+        setError(false)
+        //Objeto de Paciente
+        const objetoPaciente = {
+            nombre,
+            propietario,
+            email,
+            fecha,
+            sintomas
+        }
+        setPacientes([...pacientes, objetoPaciente])
+
+        //Reiniciar el formulario
+        setNombre('')
+        serPropietario('')
+        setEmail('')
+        setFecha('')
+        setSintomas('')
     }
 
     return(
@@ -17,7 +49,9 @@ const Formulario = () => {
 
             <form
                 onSubmit={handleSubmit}
-                className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+                className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 mx-5">
+
+                {error && <Error><p>Todos los campos son obligatorios</p></Error>}
                 <div className="mb-5">
                     <label htmlFor="mascota" className="block text-gray-700 uppercase font-bold" >
                         Nombre mascota
@@ -41,6 +75,8 @@ const Formulario = () => {
                         type="text"
                         placeholder="Nombre del propietario"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={propietario}
+                        onChange={ (e)=> serPropietario(e.target.value)}
                     />
                 </div>
 
@@ -53,6 +89,8 @@ const Formulario = () => {
                         type="email"
                         placeholder="Email contacto propietario"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={email}
+                        onChange={ (e)=> setEmail(e.target.value)}
                     />
                 </div>
 
@@ -64,6 +102,8 @@ const Formulario = () => {
                         id="alta"
                         type="date"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={fecha}
+                        onChange={ (e)=> setFecha(e.target.value)}
                     />
                 </div>
 
@@ -75,6 +115,8 @@ const Formulario = () => {
                         id="sintomas"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         placeholder="Describe los síntomas"
+                        value={sintomas}
+                        onChange={ (e)=> setSintomas(e.target.value)}
 
                     />
                 </div>
@@ -82,7 +124,7 @@ const Formulario = () => {
                 <input
                     type="submit"
                     className="bg-indigo-600 w-full p-3 text-white uppercase font-bold
-                    hover:bg-indigo-700 cursor-pointer transition-colors"
+                    hover:bg-indigo-700 cursor-pointer transition-colors rounded-md"
                     value="Agregar pacientes"
                 />
             </form>
