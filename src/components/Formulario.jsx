@@ -1,14 +1,28 @@
 import {useState, useEffect} from "react";
 import Error from "./Error.jsx";
 
-const Formulario = ({pacientes, setPacientes}) => {
+const Formulario = ({pacientes, setPacientes, paciente}) => {
     const [nombre, setNombre] = useState('')
-    const [propietario, serPropietario] = useState('')
+    const [propietario, setPropietario] = useState('')
     const [email, setEmail] = useState('')
     const [fecha, setFecha] = useState('')
     const [sintomas, setSintomas] = useState('')
 
     const [error, setError] = useState(false)
+
+    useEffect(()=>{
+
+    },[paciente])
+
+
+
+    const generarId = () => {
+        const random = Math.random().toString(36).substring(2)
+        const fecha = Date.now().toString()
+
+        return random + fecha
+    }
+
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -27,13 +41,14 @@ const Formulario = ({pacientes, setPacientes}) => {
             propietario,
             email,
             fecha,
-            sintomas
+            sintomas,
+            id: generarId()
         }
         setPacientes([...pacientes, objetoPaciente])
 
         //Reiniciar el formulario
         setNombre('')
-        serPropietario('')
+        setPropietario('')
         setEmail('')
         setFecha('')
         setSintomas('')
@@ -76,7 +91,7 @@ const Formulario = ({pacientes, setPacientes}) => {
                         placeholder="Nombre del propietario"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={propietario}
-                        onChange={ (e)=> serPropietario(e.target.value)}
+                        onChange={ (e)=> setPropietario(e.target.value)}
                     />
                 </div>
 
