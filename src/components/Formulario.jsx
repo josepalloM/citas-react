@@ -73,9 +73,9 @@ const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
 
     return(
         <div className="md:w-1/2 lg:w-2/5">
-            <h2 className="font-black text-3xl text-center">Seguimiento Pacientes</h2>
+            <h2 className="font-black text-3xl text-center">Ingreso Clientes</h2>
             <p className="text-lg mt-5 text-center mb-10">
-                Añade Pacientes y {''}
+                Añade Clientes y {''}
                 <span className="text-indigo-600 font-bold">Administralos</span>
             </p>
 
@@ -86,12 +86,12 @@ const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
                 {error && <Error><p>Todos los campos son obligatorios</p></Error>}
                 <div className="mb-5">
                     <label htmlFor="mascota" className="block text-gray-700 uppercase font-bold" >
-                        Nombre mascota
+                        Nombres 
                     </label>
                     <input
                         id="mascota"
                         type="text"
-                        placeholder="Nombre de la mascota"
+                        placeholder="Nombres"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={nombre}
                         onChange={ (e)=> setNombre(e.target.value)}
@@ -100,12 +100,12 @@ const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
 
                 <div className="mb-5">
                     <label htmlFor="propietario" className="block text-gray-700 uppercase font-bold" >
-                        Nombre propietario
+                        Apellidos
                     </label>
                     <input
                         id="propietario"
                         type="text"
-                        placeholder="Nombre del propietario"
+                        placeholder="Apellidos "
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={propietario}
                         onChange={ (e)=> setPropietario(e.target.value)}
@@ -119,7 +119,7 @@ const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
                     <input
                         id="email"
                         type="email"
-                        placeholder="Email contacto propietario"
+                        placeholder="Email cliente"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={email}
                         onChange={ (e)=> setEmail(e.target.value)}
@@ -128,7 +128,7 @@ const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
 
                 <div className="mb-5">
                     <label htmlFor="alta" className="block text-gray-700 uppercase font-bold" >
-                        Alta
+                        Fecha
                     </label>
                     <input
                         id="alta"
@@ -141,7 +141,7 @@ const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
 
                 <div className="mb-5">
                     <label htmlFor="sintomas" className="block text-gray-700 uppercase font-bold" >
-                        Síntomas
+                        Notas
                     </label>
                     <textarea
                         id="sintomas"
@@ -157,7 +157,7 @@ const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
                     type="submit"
                     className="bg-indigo-600 w-full p-3 text-white uppercase font-bold
                     hover:bg-indigo-700 cursor-pointer transition-colors rounded-md"
-                    value={paciente.id ? "Editar Paciente" : "AgregarPaciente"}
+                    value={paciente.id ? "Editar Cliente" : "Agregar Cliente"}
                 />
             </form>
         </div>
